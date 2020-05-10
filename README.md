@@ -2,13 +2,13 @@
 
 This is a port from [jBCrypt](https://github.com/jeremyh/jBCrypt) to TypeScript for use in [Deno](https://deno.land/).
 
-It has zero third-party dependancies.
+It has zero third-party dependancies and requires no permissions.
 
 ## Import
 
 ```ts
 // Not published yet
-import * as bcrypt from "https://denopkg/com/jamesbroadberry/bcrypt/mod.ts";
+import * as bcrypt from "https://denopkg.com/x/bcrypt/mod.ts";
 ```
 
 ## Usage
