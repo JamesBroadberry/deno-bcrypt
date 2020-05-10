@@ -2,7 +2,7 @@
 
 This is a port from [jBCrypt](https://github.com/jeremyh/jBCrypt) to TypeScript for use in [Deno](https://deno.land/).
 
-It has zero third-party dependancies and requires no permissions.
+It has zero third-party dependencies and requires no permissions.
 
 ## Import
 
