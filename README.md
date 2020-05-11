@@ -7,8 +7,7 @@ It has zero third-party dependencies and requires no permissions.
 ## Import
 
 ```ts
-// Not published yet
-import * as bcrypt from "https://denopkg.com/x/bcrypt/mod.ts";
+import * as bcrypt from "https://deno.land/x/bcrypt/mod.ts";
 ```
 
 ## Usage
