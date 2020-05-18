@@ -1,5 +1,7 @@
 # BCrypt
 
+[![deno doc](https://doc.deno.land/badge.svg)](https://doc.deno.land/https/deno.land/x/bcrypt/mod.ts)
+
 This is a port from [jBCrypt](https://github.com/jeremyh/jBCrypt) to TypeScript for use in [Deno](https://deno.land/).
 
 It has zero third-party dependencies.
