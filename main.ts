@@ -1,3 +1,4 @@
+import { dirname, join } from "https://deno.land/std/path/mod.ts";
 import * as bcrypt from "./bcrypt/bcrypt.ts";
 
 /**
@@ -13,7 +14,10 @@ export async function hash(
   plaintext: string,
   saltRounds: number | undefined = undefined,
 ): Promise<string> {
-  let worker = new Worker("./worker.ts", { type: "module", deno: true });
+  let worker = new Worker(
+    join(dirname(import.meta.url), "worker.ts"),
+    { type: "module", deno: true },
+  );
 
   worker.postMessage({
     action: "hash",
