@@ -1,6 +1,8 @@
 import { encode } from "https://deno.land/std/encoding/utf8.ts";
 import * as base64 from "./base64.ts";
 
+let crypto: Crypto = globalThis.crypto;
+
 // BCrypt parameters
 const GENSALT_DEFAULT_LOG2_ROUNDS = 10;
 const BCRYPT_SALT_LEN = 16;
@@ -1079,7 +1081,7 @@ function encipher(lr: Int32Array, off: number): void {
   let r = lr[off + 1];
 
   l ^= P[0];
-  for (i = 0; i <= BLOWFISH_NUM_ROUNDS - 2; ) {
+  for (i = 0; i <= BLOWFISH_NUM_ROUNDS - 2;) {
     // Feistel substitution on left word
     n = S[(l >> 24) & 0xff];
     n += S[0x100 | ((l >> 16) & 0xff)];
@@ -1169,7 +1171,7 @@ function crypt_raw(
   password: Uint8Array,
   salt: Uint8Array,
   log_rounds: number,
-  cdata: Int32Array
+  cdata: Int32Array,
 ): Uint8Array {
   let rounds = 0;
   let i = 0;
@@ -1177,8 +1179,9 @@ function crypt_raw(
   let clen = cdata.length;
   let ret: Uint8Array;
 
-  if (log_rounds < 4 || log_rounds > 30)
+  if (log_rounds < 4 || log_rounds > 30) {
     throw new Error("Bad number of rounds");
+  }
   rounds = 1 << log_rounds;
   if (salt.length !== BCRYPT_SALT_LEN) throw new Error("Bad salt length");
 
@@ -1213,8 +1216,9 @@ export function hashpw(password: string, salt: string = gensalt()): string {
   let off = 0;
   let rs: string[] = [];
 
-  if (salt.charAt(0) !== "$" || salt.charAt(1) !== "2")
+  if (salt.charAt(0) !== "$" || salt.charAt(1) !== "2") {
     throw new Error("Invalid salt version");
+  }
   if (salt.charAt(2) === "$") off = 3;
   else {
     minor = salt.charAt(2);
@@ -1222,8 +1226,9 @@ export function hashpw(password: string, salt: string = gensalt()): string {
       (minor.charCodeAt(0) >= "a".charCodeAt(0) &&
         minor.charCodeAt(0) >= "z".charCodeAt(0)) ||
       salt.charAt(3) !== "$"
-    )
+    ) {
       throw new Error("Invalid salt revision");
+    }
     off = 4;
   }
 
@@ -1234,7 +1239,7 @@ export function hashpw(password: string, salt: string = gensalt()): string {
   real_salt = salt.substring(off + 3, off + 25);
 
   passwordb = encode(
-    password + (minor.charCodeAt(0) >= "a".charCodeAt(0) ? "\u0000" : "")
+    password + (minor.charCodeAt(0) >= "a".charCodeAt(0) ? "\u0000" : ""),
   );
 
   saltb = base64.decode(real_salt, BCRYPT_SALT_LEN);
@@ -1256,12 +1261,11 @@ export function hashpw(password: string, salt: string = gensalt()): string {
 }
 
 export function gensalt(
-  log_rounds: number = GENSALT_DEFAULT_LOG2_ROUNDS
+  log_rounds: number = GENSALT_DEFAULT_LOG2_ROUNDS,
 ): string {
   let rs: string[] = [];
   let rnd = new Uint8Array(BCRYPT_SALT_LEN);
   crypto.getRandomValues(rnd);
-
   rs.push("$2a$");
   if (log_rounds < 10) rs.push("0");
   if (log_rounds > 30) {
@@ -1284,7 +1288,8 @@ export function checkpw(plaintext: string, hashed: string): boolean {
   if (hashed_bytes.length !== try_bytes.length) return false;
 
   let ret = 0;
-  for (let i = 0; i < try_bytes.length; i++)
+  for (let i = 0; i < try_bytes.length; i++) {
     ret |= hashed_bytes[i] ^ try_bytes[i];
+  }
   return ret === 0;
 }

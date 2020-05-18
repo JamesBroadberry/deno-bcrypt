@@ -1,1 +1,8 @@
-export { checkpw, gensalt, hashpw } from "./bcrypt.ts";
+export {
+  genSalt,
+  compare,
+  hash,
+  genSaltSync,
+  compareSync,
+  hashSync,
+} from "./main.ts";
