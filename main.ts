@@ -46,7 +46,10 @@ export async function hash(
 export async function genSalt(
   log_rounds: number | undefined = undefined,
 ): Promise<string> {
-  let worker = new Worker("./worker.ts", { type: "module", deno: true });
+  let worker = new Worker(
+    join(dirname(import.meta.url), "worker.ts"),
+    { type: "module", deno: true },
+  );
 
   worker.postMessage({
     action: "genSalt",
@@ -76,7 +79,10 @@ export async function compare(
   plaintext: string,
   hash: string,
 ): Promise<boolean> {
-  let worker = new Worker("./worker.ts", { type: "module", deno: true });
+  let worker = new Worker(
+    join(dirname(import.meta.url), "worker.ts"),
+    { type: "module", deno: true },
+  );
 
   worker.postMessage({
     action: "compare",
