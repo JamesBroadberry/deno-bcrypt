@@ -1,4 +1,3 @@
-import { dirname, join } from "https://deno.land/std/path/mod.ts";
 import * as bcrypt from "./bcrypt/bcrypt.ts";
 
 /**
@@ -15,7 +14,7 @@ export async function hash(
   saltRounds: number | undefined = undefined,
 ): Promise<string> {
   let worker = new Worker(
-    join(dirname(import.meta.url), "worker.ts"),
+    new URL("worker.ts", import.meta.url).toString(),
     { type: "module", deno: true },
   );
 
@@ -47,7 +46,7 @@ export async function genSalt(
   log_rounds: number | undefined = undefined,
 ): Promise<string> {
   let worker = new Worker(
-    join(dirname(import.meta.url), "worker.ts"),
+    new URL("worker.ts", import.meta.url).toString(),
     { type: "module", deno: true },
   );
 
@@ -80,7 +79,7 @@ export async function compare(
   hash: string,
 ): Promise<boolean> {
   let worker = new Worker(
-    join(dirname(import.meta.url), "worker.ts"),
+    new URL("worker.ts", import.meta.url).toString(),
     { type: "module", deno: true },
   );
 
