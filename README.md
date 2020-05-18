@@ -7,7 +7,7 @@ This is a port from [jBCrypt](https://github.com/jeremyh/jBCrypt) to TypeScript 
 It has zero third-party dependencies.
 
 Running in sync requires no permissions.
-Running in async functionality requires --allow-read, --allow-net and --unstable
+Running in async functionality requires --allow-net and --unstable
 
 ## Import
 
@@ -19,7 +19,7 @@ import * as bcrypt from "https://deno.land/x/bcrypt/mod.ts";
 
 ### Async
 
-The Async implementation requires WebWorkers which require --allow-read to import relative files and --allow-net to import Deno standard modules. Also, to [allow Crypto inside a WebWorker](https://github.com/denoland/deno/pull/5121), you'll need to use the --unstable flag too.
+The Async implementation requires WebWorkers which require --allow-net to import Deno standard modules from inside the Worker. Also, to [allow Crypto inside a WebWorker](https://github.com/denoland/deno/pull/5121), you'll need to use the --unstable flag too.
 
 ```ts
 const hash = await bcrypt.hash("test");

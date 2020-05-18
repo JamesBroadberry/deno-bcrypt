@@ -2,7 +2,7 @@ import * as bcrypt from "./bcrypt/bcrypt.ts";
 
 /**
  * Generate a hash for the plaintext password
- * Requires --allow-net, --allow-read and --unstable flags
+ * Requires --allow-net and --unstable flags
  *
  * @export
  * @param {string} plaintext The password to hash
@@ -36,7 +36,7 @@ export async function hash(
 
 /**
  * Generates a salt using a number of log rounds
- * Requires --allow-net, --allow-read and --unstable flags
+ * Requires --allow-net and --unstable flags
  *
  * @export
  * @param {(number | undefined)} [log_rounds=undefined] Number of log rounds to use. Recommended to leave this undefined.
@@ -67,7 +67,7 @@ export async function genSalt(
 
 /**
  * Check if a plaintext password matches a hash
- * Requires --allow-net, --allow-read and --unstable flags
+ * Requires --allow-net and --unstable flags
  *
  * @export
  * @param {string} plaintext The plaintext password to check
