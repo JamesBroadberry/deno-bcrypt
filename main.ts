@@ -6,12 +6,12 @@ import * as bcrypt from "./bcrypt/bcrypt.ts";
  *
  * @export
  * @param {string} plaintext The password to hash
- * @param {(number | undefined)} [saltRounds=undefined] Number of salt rounds to use. Recommended to leave this undefined.
+ * @param {(string | undefined)} [salt=undefined] The salt to use when hashing. Recommended to leave this undefined.
  * @returns {Promise<string>} The hashed password
  */
 export async function hash(
   plaintext: string,
-  saltRounds: number | undefined = undefined,
+  salt: string | undefined = undefined,
 ): Promise<string> {
   let worker = new Worker(
     new URL("worker.ts", import.meta.url).toString(),
@@ -22,7 +22,7 @@ export async function hash(
     action: "hash",
     payload: {
       plaintext,
-      saltRounds,
+      salt,
     },
   });
 
@@ -123,11 +123,13 @@ export function compareSync(plaintext: string, hash: string): boolean {
  * Using the async variant is highly recommended.
  *
  * @export
- * @param {(number | undefined)} [rounds=undefined] Number of log rounds to use. Recommended to leave this undefined.
+ * @param {(number | undefined)} [log_rounds=undefined] Number of log rounds to use. Recommended to leave this undefined.
  * @returns {string} The generated salt
  */
-export function genSaltSync(rounds: number | undefined = undefined): string {
-  return bcrypt.gensalt(rounds);
+export function genSaltSync(
+  log_rounds: number | undefined = undefined,
+): string {
+  return bcrypt.gensalt(log_rounds);
 }
 
 /**
@@ -137,7 +139,7 @@ export function genSaltSync(rounds: number | undefined = undefined): string {
  *
  * @export
  * @param {string} plaintext The password to hash
- * @param {(string | undefined)} [salt=undefined] Number of salt rounds to use. Recommended to leave this undefined.
+ * @param {(string | undefined)} [salt=undefined] The salt to use when hashing. Recommended to leave this undefined.
  * @returns {string} The hashed password
  */
 export function hashSync(
