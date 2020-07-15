@@ -20,7 +20,7 @@ import * as bcrypt from "https://deno.land/x/bcrypt/mod.ts";
 To ensure that you've got a specific version, it's recommend to import this module specifying a [specific release](https://github.com/JamesBroadberry/deno-bcrypt/releases) like so:
 
 ```ts
-import * as bcrypt from "https://deno.land/x/bcrypt@v0.2.2/mod.ts";
+import * as bcrypt from "https://deno.land/x/bcrypt@v0.2.3/mod.ts";
 ```
 
 ## Usage
