@@ -15,7 +15,7 @@ export async function hash(
 ): Promise<string> {
   let worker = new Worker(
     new URL("worker.ts", import.meta.url).toString(),
-    { type: "module", deno: true },
+    { type: "module" },
   );
 
   worker.postMessage({
@@ -47,7 +47,7 @@ export async function genSalt(
 ): Promise<string> {
   let worker = new Worker(
     new URL("worker.ts", import.meta.url).toString(),
-    { type: "module", deno: true },
+    { type: "module" },
   );
 
   worker.postMessage({
@@ -80,7 +80,7 @@ export async function compare(
 ): Promise<boolean> {
   let worker = new Worker(
     new URL("worker.ts", import.meta.url).toString(),
-    { type: "module", deno: true },
+    { type: "module" },
   );
 
   worker.postMessage({
