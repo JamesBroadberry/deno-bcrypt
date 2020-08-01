@@ -1,4 +1,4 @@
-import { encode } from "../deps.ts";
+import { encode } from "../../deps.ts";
 import * as base64 from "./base64.ts";
 
 let crypto: Crypto = globalThis.crypto;

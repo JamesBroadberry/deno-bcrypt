@@ -1,6 +1,7 @@
-const base64_code = "./ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789".split(
-  ""
-);
+const base64_code =
+  "./ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789".split(
+    "",
+  );
 
 const index_64 = new Uint8Array([
   -1,
