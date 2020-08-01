@@ -5,4 +5,4 @@ export {
   genSaltSync,
   compareSync,
   hashSync,
-} from "./main.ts";
+} from "./src/main.ts";

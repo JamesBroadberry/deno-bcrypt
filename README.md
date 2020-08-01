@@ -1,6 +1,8 @@
 # BCrypt
 
 [![deno doc](https://doc.deno.land/badge.svg)](https://doc.deno.land/https/deno.land/x/bcrypt/mod.ts)
+[![release](https://img.shields.io/github/v/release/jamesbroadberry/deno-bcrypt.svg?color=green&label=latest)](https://github.com/JamesBroadberry/deno-bcrypt/releases)
+[![ci](https://github.com/JamesBroadberry/deno-bcrypt/workflows/ci/badge.svg)](https://github.com/JamesBroadberry/deno-bcrypt/actions)
 
 This is a port from [jBCrypt](https://github.com/jeremyh/jBCrypt) to TypeScript for use in [Deno](https://deno.land/).
 
@@ -20,7 +22,7 @@ import * as bcrypt from "https://deno.land/x/bcrypt/mod.ts";
 To ensure that you've got a specific version, it's recommend to import this module specifying a [specific release](https://github.com/JamesBroadberry/deno-bcrypt/releases) like so:
 
 ```ts
-import * as bcrypt from "https://deno.land/x/bcrypt@v0.2.3/mod.ts";
+import * as bcrypt from "https://deno.land/x/bcrypt@v0.2.4/mod.ts";
 ```
 
 ## Usage
