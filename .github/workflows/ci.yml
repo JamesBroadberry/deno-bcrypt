@@ -1,0 +1,28 @@
+name: ci
+on: [push, pull_request]
+
+jobs:
+  test:
+    runs-on: ${{ matrix.os }}
+
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest, macOS-latest]
+        deno: ["v1.0.0", "v1.x", "nightly"]
+    name: Test run with Deno ${{ matrix.deno }}
+    steps:
+      - uses: actions/checkout@master
+
+      - name: Setup Deno ${{matrix.deno}}
+        uses: denolib/setup-deno@master
+        with:
+          deno-version: ${{matrix.deno}}
+
+      - name: Print deno version
+        run: deno --version
+
+      - name: Check format
+        run: deno fmt --check
+
+      - name: Run tests
+        run: deno test --unstable --allow-read
