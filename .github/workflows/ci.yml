@@ -8,7 +8,7 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest, windows-latest, macOS-latest]
-        deno: ["v1.0.0", "v1.x"]
+        deno: ["v1.1.0", "v1.2.0", "v1.x"]
     name: Test run with Deno ${{ matrix.deno }} on ${{ matrix.os }}
     steps:
       - uses: actions/checkout@master
