@@ -1,8 +1,8 @@
 export {
-  genSalt,
   compare,
-  hash,
-  genSaltSync,
   compareSync,
+  genSalt,
+  genSaltSync,
+  hash,
   hashSync,
 } from "./src/main.ts";
