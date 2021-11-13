@@ -1,7 +1,7 @@
 import {
   assertEquals,
   assertThrows,
-} from "https://deno.land/std/testing/asserts.ts";
+} from "https://deno.land/std@0.114.0/testing/asserts.ts";
 
 import * as bcrypt from "../mod.ts";
 

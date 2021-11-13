@@ -2,7 +2,7 @@ import * as bcrypt from "./bcrypt/bcrypt.ts";
 
 /**
  * Generate a hash for the plaintext password
- * Requires --allow-net and --unstable flags
+ * Requires --allow-net
  *
  * @export
  * @param {string} plaintext The password to hash
@@ -15,7 +15,7 @@ export async function hash(
 ): Promise<string> {
   let worker = new Worker(
     new URL("worker.ts", import.meta.url).toString(),
-    { type: "module", deno: true },
+    { type: "module" },
   );
 
   worker.postMessage({
@@ -36,7 +36,7 @@ export async function hash(
 
 /**
  * Generates a salt using a number of log rounds
- * Requires --allow-net and --unstable flags
+ * Requires --allow-net
  *
  * @export
  * @param {(number | undefined)} [log_rounds=undefined] Number of log rounds to use. Recommended to leave this undefined.
@@ -47,7 +47,7 @@ export async function genSalt(
 ): Promise<string> {
   let worker = new Worker(
     new URL("worker.ts", import.meta.url).toString(),
-    { type: "module", deno: true },
+    { type: "module" },
   );
 
   worker.postMessage({
@@ -67,7 +67,7 @@ export async function genSalt(
 
 /**
  * Check if a plaintext password matches a hash
- * Requires --allow-net and --unstable flags
+ * Requires --allow-net
  *
  * @export
  * @param {string} plaintext The plaintext password to check
@@ -80,7 +80,7 @@ export async function compare(
 ): Promise<boolean> {
   let worker = new Worker(
     new URL("worker.ts", import.meta.url).toString(),
-    { type: "module", deno: true },
+    { type: "module" },
   );
 
   worker.postMessage({
