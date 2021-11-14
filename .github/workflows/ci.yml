@@ -8,7 +8,7 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest]
-        deno: ["v1.2.0", "v1.x"]
+        deno: ["v1.9.0", "v1.x"]
     name: Test run with Deno ${{ matrix.deno }} on ${{ matrix.os }}
     steps:
       - uses: actions/checkout@master
@@ -22,7 +22,7 @@ jobs:
         run: deno --version
 
       - name: Check format
-        run: deno fmt --check
+        run: deno fmt --check --ignore=./README.md
 
       - name: Run tests
         run: deno test --unstable --allow-read
