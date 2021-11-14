@@ -1,7 +1,7 @@
 import * as base64 from "./base64.ts";
 
 let crypto: Crypto = globalThis.crypto;
-const encode = (new TextEncoder()).encode;
+const encoder = new TextEncoder()
 
 // BCrypt parameters
 const GENSALT_DEFAULT_LOG2_ROUNDS = 10;
@@ -1238,7 +1238,7 @@ export function hashpw(password: string, salt: string = gensalt()): string {
 
   real_salt = salt.substring(off + 3, off + 25);
 
-  passwordb = encode(
+  passwordb = encoder.encode(
     password + (minor.charCodeAt(0) >= "a".charCodeAt(0) ? "\u0000" : ""),
   );
 
@@ -1282,8 +1282,8 @@ export function checkpw(plaintext: string, hashed: string): boolean {
   let try_bytes: Uint8Array;
 
   let try_pw = hashpw(plaintext, hashed);
-  hashed_bytes = encode(hashed);
-  try_bytes = encode(try_pw);
+  hashed_bytes = encoder.encode(hashed);
+  try_bytes = encoder.encode(try_pw);
 
   if (hashed_bytes.length !== try_bytes.length) return false;
 
