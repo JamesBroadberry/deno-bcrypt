@@ -22,7 +22,7 @@ jobs:
         run: deno --version
 
       - name: Check format
-        run: deno fmt --check
+        run: deno fmt --check --ignore=./README.md
 
       - name: Run tests
         run: deno test --unstable --allow-read
