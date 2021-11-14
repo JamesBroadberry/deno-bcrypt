@@ -1,7 +1,7 @@
 import * as base64 from "./base64.ts";
 
 let crypto: Crypto = globalThis.crypto;
-const encoder = new TextEncoder()
+const encoder = new TextEncoder();
 
 // BCrypt parameters
 const GENSALT_DEFAULT_LOG2_ROUNDS = 10;
