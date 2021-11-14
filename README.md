@@ -22,7 +22,7 @@ import * as bcrypt from "https://deno.land/x/bcrypt/mod.ts";
 To ensure that you've got a specific version, it's recommend to import this module specifying a [specific release](https://github.com/JamesBroadberry/deno-bcrypt/releases) like so:
 
 ```ts
-import * as bcrypt from "https://deno.land/x/bcrypt@v0.2.4/mod.ts";
+import * as bcrypt from "https://deno.land/x/bcrypt@v0.3.0/mod.ts";
 ```
 
 ## Usage
@@ -70,6 +70,11 @@ To hash a password with a manually generated salt:
 const salt = bcrypt.genSaltSync(8);
 const hash = bcrypt.hashSync("test", salt);
 ```
+
+### Older versions of Deno and/or BCrypt
+
+Older versions of Deno will require an older version of this library (specifically < 0.3.0) because of the introduction of `TextEncoder`.
+However, older version of this library require the `--unstable` flag when running.
 
 ## Issues
 
