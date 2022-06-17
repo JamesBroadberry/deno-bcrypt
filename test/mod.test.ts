@@ -1,7 +1,7 @@
 import {
   assertEquals,
   assertThrows,
-} from "https://deno.land/std@0.97.0/testing/asserts.ts";
+} from "https://deno.land/std@0.144.0/testing/asserts.ts";
 
 import * as bcrypt from "../mod.ts";
 
@@ -155,5 +155,63 @@ Deno.test({
     );
 
     assertEquals(passwordVerified, false);
+  },
+});
+
+Deno.test({
+  name: "hashing password then verifying using an external service works",
+  async fn(): Promise<void> {
+    const passwordToTest = "ThisIsAPassword1234";
+    const hashedPassword = bcrypt.hashSync(passwordToTest);
+
+    const res = await fetch("https://bcrypt.online/verify", {
+      "headers": {
+        "content-type": "application/x-www-form-urlencoded; charset=UTF-8",
+      },
+      "body": `plain_text=${passwordToTest}&hash=${hashedPassword}`,
+      "method": "POST",
+    });
+
+    const data = await res.json();
+
+    assertEquals(data.is_verified, true);
+  },
+});
+
+Deno.test({
+  name:
+    "hashing password using an external service works then verifying locally works",
+  async fn(): Promise<void> {
+    const passwordToTest = "ThisIsAPassword1234";
+
+    const res = await fetch("https://bcrypt.online/calculate", {
+      "headers": {
+        "content-type": "application/x-www-form-urlencoded; charset=UTF-8",
+      },
+      "body": `plain_text=${passwordToTest}&cost_factor=10`,
+      "method": "POST",
+    });
+
+    const data = await res.json();
+    const hashedPassword = data.hash;
+
+    const passwordVerified = await bcrypt.compare(
+      passwordToTest,
+      hashedPassword,
+    );
+
+    assertEquals(passwordVerified, true);
+  },
+});
+
+Deno.test({
+  name:
+    "comparing wrong plaintext with hash from another plaintext returns false",
+  async fn(): Promise<void> {
+    const hash = await bcrypt.hash("replicate");
+    const result = await bcrypt.compare("replicate", hash);
+    assertEquals(result, true);
+    const resultKo = await bcrypt.compare("wrongpassword", hash);
+    assertEquals(resultKo, false);
   },
 });
