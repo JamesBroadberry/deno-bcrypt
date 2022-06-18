@@ -1193,7 +1193,7 @@ function crypt_raw(
   }
 
   for (i = 0; i < 64; i++) {
-    for (j = 0; j < clen >> 1; j++) encipher(cdata, j << 1);
+    for (j = 0; j < (clen >> 1); j++) encipher(cdata, j << 1);
   }
 
   ret = new Uint8Array(clen * 4);
