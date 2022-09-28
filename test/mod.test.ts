@@ -215,3 +215,17 @@ Deno.test({
     assertEquals(resultKo, false);
   },
 });
+
+Deno.test({
+  name:
+    "hash generated with older Deno and bcrypt version is still recognized as valid by newer versions of Deno and bcrypt",
+  async fn(): Promise<void> {
+    assertEquals(
+      await bcrypt.compare(
+        "password123",
+        "$2a$10$i7yVylH68UTYSoa./.BWxO0NTXjvPRMzT6F0CgKItqKUqwQwj3y0W",
+      ),
+      true,
+    );
+  },
+});
